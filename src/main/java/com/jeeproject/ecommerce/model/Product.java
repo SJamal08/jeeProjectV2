@@ -73,7 +73,6 @@ public class Product implements Serializable {
         this.idProduct = id;
     }
 
-    @Id
     public Long getIdProduct() {
         return idProduct;
     }

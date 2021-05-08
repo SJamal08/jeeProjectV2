@@ -10,36 +10,29 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
     private Long idUser;
+
     private String firstname;
+
     private String lastname;
+
     private String email;
+
     private String phoneNumber;
+
     private String password;
+
     private String address;
+
     @Column(nullable = false , updatable = false)
     private String userCode;
 
-
-    public User() {
-
-    }
-
-    public User(Long idUser, String firstname, String lastname, String email, String phoneNumber, String password, String address, String userCode) {
-        this.idUser = idUser;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.address = address;
-        this.userCode = userCode;
+    public User(){
     }
 
     public void setIdUser(Long id) {
         this.idUser = id;
     }
 
-    @Id
     public Long getIdUser() {
         return idUser;
     }

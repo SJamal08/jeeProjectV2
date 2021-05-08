@@ -22,8 +22,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        user.setUserCode("us-"+UUID.randomUUID().toString());
-        System.out.println(user.getFirstname());
+        user.setUserCode(UUID.randomUUID().toString());
         return userRepo.save(user);
     }
 

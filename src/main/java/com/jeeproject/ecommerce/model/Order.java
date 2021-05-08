@@ -7,11 +7,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 public class Order implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+ //   @Id
+ //  @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
     private Long idOrder;
   /*  @OneToMany(fetch =FetchType.LAZY,mappedBy = "idUser")
