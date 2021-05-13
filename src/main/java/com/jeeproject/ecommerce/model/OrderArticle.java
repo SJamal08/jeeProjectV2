@@ -1,39 +1,50 @@
 package com.jeeproject.ecommerce.model;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-//@Entity
-public class Order implements Serializable {
+@Entity
+public class OrderArticle implements Serializable {
 
- //   @Id
- //  @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
     private Long idOrder;
-  /*  @OneToMany(fetch =FetchType.LAZY,mappedBy = "idUser")
-    private List <Product> productList = new ArrayList<Product>();
-    @Column(nullable = false , updatable = false)*/
+
+    @OneToMany(targetEntity =Product.class, mappedBy = "idProduct")
+    private List <Product> productList;
+
+    @Column(nullable = false , updatable = false)
     private String userCode;
+
     private String deliveryAddress;
+
     @Column(nullable = false , updatable = false)
     private String orderDate;
+
     @Column(nullable = false , updatable = false)
     private String orderCode;
 
-    public Order() {
+    public OrderArticle() {
     }
 
-    /*public List<Product> getProductList() {
+    public OrderArticle(Long idOrder, List<Product> productList, String userCode, String deliveryAddress, String orderDate, String orderCode) {
+        this.idOrder = idOrder;
+       // this.productList = productList;
+        this.userCode = userCode;
+        this.deliveryAddress = deliveryAddress;
+        this.orderDate = orderDate;
+        this.orderCode = orderCode;
+    }
+
+    public List<Product> getProductList() {
         return productList;
     }
 
     public void setProductList(List<Product> productList) {
         this.productList = productList;
-    }*/
+    }
 
     public String getDeliveryAddress() {
         return deliveryAddress;
@@ -67,11 +78,12 @@ public class Order implements Serializable {
         this.orderCode = orderCode;
     }
 
-    public void setIdOrder(Long id) {
-        this.idOrder = id;
+
+
+    public void setIdOrder(Long idOrder) {
+        this.idOrder = idOrder;
     }
 
-    @Id
     public Long getIdOrder() {
         return idOrder;
     }

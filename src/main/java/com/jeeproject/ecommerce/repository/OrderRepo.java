@@ -1,7 +1,13 @@
 package com.jeeproject.ecommerce.repository;
 
-import com.jeeproject.ecommerce.model.Order;
+import com.jeeproject.ecommerce.model.OrderArticle;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OrderRepo{
+import java.util.Optional;
+
+public interface OrderRepo extends JpaRepository<OrderArticle,Long>{
+
+    void deleteOrderByOrderCode(String productCode);
+
+    Optional<OrderArticle> findOrderByOrderCode(String productCode);
 }
