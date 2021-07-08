@@ -10,10 +10,15 @@ public class Product implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
     private Long idProduct;
+
     private String title;
+
     private String imageUrl;
+
     private Long price;
+
     private Integer rating;
+
     @Column(nullable = false , updatable = false)
     private String productCode;
 
@@ -22,6 +27,14 @@ public class Product implements Serializable {
 
     public Product(Long idProduct, String title, String imageUrl, Long price, Integer rating, String productCode) {
         this.idProduct = idProduct;
+        this.title = title;
+        this.imageUrl = imageUrl;
+        this.price = price;
+        this.rating = rating;
+        this.productCode = productCode;
+    }
+
+    public Product(String title, String imageUrl, Long price, Integer rating, String productCode) {
         this.title = title;
         this.imageUrl = imageUrl;
         this.price = price;

@@ -2,18 +2,19 @@ package com.jeeproject.ecommerce.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class OrderArticle implements Serializable {
+public class Command implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
-    private Long idOrder;
+    private Long idCommand;
 
     @OneToMany(targetEntity =Product.class, mappedBy = "idProduct")
-    private List <Product> productList;
+    private List<Product> productList= new ArrayList<Product>();
 
     @Column(nullable = false , updatable = false)
     private String userCode;
@@ -21,21 +22,21 @@ public class OrderArticle implements Serializable {
     private String deliveryAddress;
 
     @Column(nullable = false , updatable = false)
-    private String orderDate;
+    private String commandDate;
 
     @Column(nullable = false , updatable = false)
-    private String orderCode;
+    private String commandCode;
 
-    public OrderArticle() {
+    public Command() {
     }
 
-    public OrderArticle(Long idOrder, List<Product> productList, String userCode, String deliveryAddress, String orderDate, String orderCode) {
-        this.idOrder = idOrder;
-       // this.productList = productList;
+    public Command(Long idCommand, List<Product> productList, String userCode, String deliveryAddress, String commandDate, String commandCode) {
+        this.idCommand = idCommand;
+       this.productList = productList;
         this.userCode = userCode;
         this.deliveryAddress = deliveryAddress;
-        this.orderDate = orderDate;
-        this.orderCode = orderCode;
+        this.commandDate = commandDate;
+        this.commandCode = commandCode;
     }
 
     public List<Product> getProductList() {
@@ -62,29 +63,29 @@ public class OrderArticle implements Serializable {
         this.userCode = userCode;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getCommandDate() {
+        return commandDate;
     }
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    public void setCommandDate(String commandDate) {
+        this.commandDate = commandDate;
     }
 
-    public String getOrderCode() {
-        return orderCode;
+    public String getCommandCode() {
+        return commandCode;
     }
 
-    public void setOrderCode(String orderCode) {
-        this.orderCode = orderCode;
+    public void setCommandCode(String commandCode) {
+        this.commandCode = commandCode;
     }
 
 
 
-    public void setIdOrder(Long idOrder) {
-        this.idOrder = idOrder;
+    public void setIdCommand(Long idCommand) {
+        this.idCommand = idCommand;
     }
 
-    public Long getIdOrder() {
-        return idOrder;
+    public Long getIdCommand() {
+        return idCommand;
     }
 }

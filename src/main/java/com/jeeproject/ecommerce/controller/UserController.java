@@ -18,7 +18,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/")
     public ResponseEntity<List<User>> getAllUsers () {
         List<User> users = userService.findAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class UserController {
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/")
     public ResponseEntity<User> addUser(@RequestBody User user) {
         User newUser = userService.addUser(user);
         return new ResponseEntity<>(newUser, HttpStatus.CREATED);

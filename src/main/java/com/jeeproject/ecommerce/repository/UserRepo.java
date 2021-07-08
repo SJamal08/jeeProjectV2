@@ -10,4 +10,10 @@ public interface UserRepo extends JpaRepository<User, Long> {
     void deleteUserByUserCode(String userCode);
 
     Optional<User> findUserByUserCode(String userCode);
+
+    Optional<User> findByUsername(String username);
+
+    Boolean existsByUsername(String username);
+
+    Boolean existsByEmail(String email);
 }

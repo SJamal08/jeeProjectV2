@@ -2,6 +2,8 @@ package com.jeeproject.ecommerce.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class User implements Serializable {
@@ -9,11 +11,9 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
-    private Long idUser;
+    private Long id;
 
-    private String firstname;
-
-    private String lastname;
+    private String username;
 
     private String email;
 
@@ -26,31 +26,55 @@ public class User implements Serializable {
     @Column(nullable = false , updatable = false)
     private String userCode;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(	name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
     public User(){
     }
 
-    public void setIdUser(Long id) {
-        this.idUser = id;
+    public User(String username, String email, String phoneNumber, String password, String address) {
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.address = address;
     }
 
-    public Long getIdUser() {
-        return idUser;
+    public User(Long id, String username, String email, String phoneNumber, String password, String address, String userCode) {
+        this.id = id;
+        this.username = username;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.address = address;
+        this.userCode = userCode;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public User(String username, String email, String password) {
+        this.username= username;
+        this.email= email;
+        this.password = password;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getLastname() {
-        return lastname;
+    public Long getId() {
+        return id;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -93,17 +117,16 @@ public class User implements Serializable {
         this.userCode = userCode;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
-        return "User{" +
-                "idUser=" + idUser +
-                ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
-                ", email='" + email + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", password='" + password + '\'' +
-                ", address='" + address + '\'' +
-                ", userCode='" + userCode + '\'' +
-                '}';
+        return super.toString();
     }
 }
