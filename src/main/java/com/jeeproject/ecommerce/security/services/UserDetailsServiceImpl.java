@@ -1,6 +1,5 @@
 package com.jeeproject.ecommerce.security.services;
 
-
 import com.jeeproject.ecommerce.model.User;
 import com.jeeproject.ecommerce.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,16 +12,25 @@ import javax.transaction.Transactional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
+
     @Autowired
-    UserRepo userRepo;
+    UserRepo userRepository;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User Not Found with username: " + username));
+    public UserDetails loadUserByUsername(String email)
+            throws UsernameNotFoundException {
 
-        return UserDetailsImpl.build(user);
+        User user = null;
+        try {
+            user = (User) userRepository.findByEmail(email)
+                    .orElseThrow(() ->
+                            new UsernameNotFoundException("User Not Found with -> email : " + email)
+                    );
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+
+        return UserPrinciple.build(user);
     }
-
 }
