@@ -1,80 +1,95 @@
 package com.jeeproject.ecommerce.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "users", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "email"
+        })
+})
 public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false , updatable = false)
-    private Long id;
+    private Long idUser;
 
-    private String username;
+    private String firstname;
+
+    private String lastname;
 
     private String email;
 
     private String phoneNumber;
 
+    @JsonIgnore
     private String password;
 
     private String address;
 
-    @Column(nullable = false , updatable = false)
-    private String userCode;
-
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Set<Role> roles = new HashSet<>();
+    private Set<Role> roles= new HashSet<>();
 
     public User(){
     }
 
-    public User(String username, String email, String phoneNumber, String password, String address) {
-        this.username = username;
+    public User(String firstname, String lastname, String email, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User(String firstname, String lastname, String email, String phoneNumber, String password, String address) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.address = address;
     }
 
-    public User(Long id, String username, String email, String phoneNumber, String password, String address, String userCode) {
-        this.id = id;
-        this.username = username;
+    public User(Long idUser, String firstname, String lastname, String email, String phoneNumber, String password, String address) {
+        this.idUser = idUser;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
         this.address = address;
-        this.userCode = userCode;
     }
 
-    public User(String username, String email, String password) {
-        this.username= username;
-        this.email= email;
-        this.password = password;
+    public void setIdUser(Long id) {
+        this.idUser = id;
     }
 
-
-
-    public void setId(Long id) {
-        this.id = id;
+    public Long getIdUser() {
+        return idUser;
     }
 
-    public Long getId() {
-        return id;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public String getUsername() {
-        return username;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public String getEmail() {
@@ -109,24 +124,24 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set roles) {
         this.roles = roles;
     }
 
     @Override
     public String toString() {
-        return super.toString();
+        return "User{" +
+                "idUser=" + idUser +
+                ", firstname='" + firstname + '\'' +
+                ", lastname='" + lastname + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", password='" + password + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

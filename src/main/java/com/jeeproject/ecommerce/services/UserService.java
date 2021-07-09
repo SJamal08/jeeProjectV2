@@ -22,8 +22,7 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        user.setUserCode(UUID.randomUUID().toString());
-        return userRepo.save(user);
+        return (User) userRepo.save(user);
     }
 
     public List<User> findAllUsers() {
@@ -31,15 +30,7 @@ public class UserService {
     }
 
     public User updateUser(User user) {
-        return userRepo.save(user);
+        return (User) userRepo.save(user);
     }
 
-    public User findUserByUserCode(String userCode) {
-        return userRepo.findUserByUserCode(userCode)
-                .orElseThrow(() -> new UserNotFoundException("User by code " + userCode + " was not found"));
-    }
-
-    public void deleteUser(String userCode){
-        userRepo.deleteUserByUserCode(userCode);
-    }
 }

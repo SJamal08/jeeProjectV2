@@ -24,11 +24,6 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    @GetMapping("/find/{userCode}")
-    public ResponseEntity<User> getUserByUserCode (@PathVariable("userCode") String userCode) {
-        User user = userService.findUserByUserCode(userCode);
-        return new ResponseEntity<>(user, HttpStatus.OK);
-    }
 
     @PostMapping("/")
     public ResponseEntity<User> addUser(@RequestBody User user) {
@@ -42,9 +37,4 @@ public class UserController {
         return new ResponseEntity<>(updateUser, HttpStatus.OK);
     }
 
-    @DeleteMapping("/delete/{userCode}")
-    public ResponseEntity<?> deleteUser(@PathVariable("userCode") String userCode) {
-        userService.deleteUser(userCode);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
 }
